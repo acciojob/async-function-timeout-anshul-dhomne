@@ -5,13 +5,20 @@ function wait(ms) {
 
 // Async function to handle the delay and display the message
 async function displayMessage() {
+  event.preventDefault(); // Prevent form submission
+
   const text = document.getElementById('text').value;
   const delay = parseInt(document.getElementById('delay').value);
-
   const outputDiv = document.getElementById('output');
 
   // Clear previous output
-  outputDiv.textContent = '';
+  outputDiv.textContent = ' ';
+
+  // Validate delay input
+  if (isNaN(delay) || delay < 0) {
+    outputDiv.textContent = "Please enter a valid delay time.";
+    return; // Exit the function if the delay is invalid
+  }
 
   // Wait for the specified delay
   await wait(delay);
